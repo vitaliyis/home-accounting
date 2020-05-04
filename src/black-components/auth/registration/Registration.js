@@ -8,7 +8,7 @@ import {
   updateEmail, updateErrorAgree,
   updateErrorEmail, updateErrorName, updateErrorPassword, updateErrors, updateName,
   updatePassword
-} from "../../../redux/reducers/auth/auth.action";
+} from "../../../black-redux/reducers/auth/auth.action";
 
 const Registration = props => {
   const {valueEmail, valuePassword, valueName, valueAgree,

@@ -1,9 +1,10 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom'
-import Login from "./components/auth/login/Login";
-import Registration from "./components/auth/registration/Registration";
-import NotFound from "./components/NotFound";
-import AuthContainer from "./components/auth/AuthContainer";
+import Login from "./components/pages/Login/Login";
+import NotFound from "./components/pages/NotFound/NotFound";
+import AuthContainer from "./components/shared/auth/AuthContainer";
+import Registration from "./components/pages/Registration/Registration";
+
 
 function App() {
   return (

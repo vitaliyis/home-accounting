@@ -13,3 +13,15 @@ export const createNewUserApi = user => {
     body: JSON.stringify(user)
   })
 }
+
+export const checkEmail = email => {
+  return getUserByEmailApi(email)
+    .then(user => {
+      if (!user.length) {
+        return ''
+      } else {
+        return 'Email уже занят!'
+      }
+      })
+    .catch(err => console.log('Error in checkEmail: ', err))
+}

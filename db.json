@@ -5,6 +5,12 @@
       "email": "wfm@mail.ru",
       "password": "12345678",
       "name": "Администратор"
+    },
+    {
+      "email": "svi1976@mail.ru",
+      "password": "1234567",
+      "name": "vetal",
+      "id": 2
     }
   ],
   "bill": {

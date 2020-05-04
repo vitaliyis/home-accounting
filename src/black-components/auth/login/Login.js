@@ -5,7 +5,7 @@ import {
   getUserByEmail,
   updateEmail, updateErrorEmail, updateErrorPassword, updateErrors,
   updatePassword
-} from "../../../redux/reducers/auth/auth.action";
+} from "../../../black-redux/reducers/auth/auth.action";
 import MessageAlert from "../MessageAlert";
 
 const Login = (props) => {

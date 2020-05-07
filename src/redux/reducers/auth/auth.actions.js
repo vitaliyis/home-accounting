@@ -1,5 +1,5 @@
 import {createNewUserApi, getUserByEmailApi} from "../../../api/api";
-import {SET_NOW_CAN_LOGIN, UPDATE_ERROR_USER, UPDATE_iS_FETCHING, UPDATE_USER} from "./auth.types";
+import {SET_AUTH, SET_NOW_CAN_LOGIN, UPDATE_ERROR_USER, UPDATE_iS_FETCHING, UPDATE_USER} from "./auth.types";
 
 export const updateUser = payload => {
   return {
@@ -29,9 +29,16 @@ export const updateIsFetching = payload => {
   }
 }
 
+// export const setAuth = payload => {
+//   return {
+//     type: SET_AUTH,
+//     payload
+//   }
+// }
+
 export const getUserByEmail = (email, password) => dispatch =>{
   dispatch(updateIsFetching(true))
-  getUserByEmailApi(email)
+  return getUserByEmailApi(email)
     .then(user => {
       if (!user.length) {
         dispatch(updateErrorUser('Такого пользователя не существует!'))
@@ -63,5 +70,17 @@ export const createNewUser = user => dispatch => {
     })
     .catch(err => console.log('Error in createNewUser: ', err))
 
+}
+
+export const getUser = () => dispatch => {
+  const user = JSON.parse(localStorage.getItem('user'))
+  if (user) {
+    dispatch(updateUser(user))
+  }
+}
+
+export const logout = () => dispatch => {
+  localStorage.clear()
+  dispatch(updateUser(null))
 }
 

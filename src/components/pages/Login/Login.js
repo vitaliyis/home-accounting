@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import {NavLink, withRouter} from 'react-router-dom'
 import {connect} from "react-redux";
 import {getUserByEmail} from "../../../redux/reducers/auth/auth.actions";
 
@@ -42,7 +42,7 @@ class Login extends React.Component {
   }
 
 
-  onSubmit = event => {
+  onSubmit = async event => {
     event.preventDefault()
     const {getUserByEmail} = this.props
     const errors = this.getErrors();
@@ -55,8 +55,8 @@ class Login extends React.Component {
       this.setState({
         errors: {},
       })
-
-      getUserByEmail(this.state.values.email, this.state.values.password)
+      await getUserByEmail(this.state.values.email, this.state.values.password)
+      this.props.history.push('/system/bill')
     }
 
   }
@@ -144,7 +144,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  getUserByEmail
+  getUserByEmail,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))

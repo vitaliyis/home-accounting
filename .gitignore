@@ -7,6 +7,8 @@
 
 # testing
 /coverage
+/src/black-components
+/src/black-redux
 
 # production
 /build

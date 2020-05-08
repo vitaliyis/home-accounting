@@ -1,7 +1,13 @@
 import React from 'react'
+import {Redirect} from "react-router-dom";
+import {connect} from "react-redux";
 
 class Planning extends React.Component {
   render() {
+    if (!this.props.user) {
+      return <Redirect to="/login"/>
+    }
+
     return(
       <article className="content">
         <div className="title-block">
@@ -86,4 +92,10 @@ class Planning extends React.Component {
   }
 }
 
-export default Planning
+const mapStateToProps = state => {
+  return {
+    user: state.authReducer.user
+  }
+}
+
+export default connect(mapStateToProps)(Planning)

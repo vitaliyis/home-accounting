@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavLink, withRouter} from 'react-router-dom'
+import {NavLink, Redirect, withRouter} from 'react-router-dom'
 import {connect} from "react-redux";
 import {checkEmail} from "../../../api/api";
 import {createNewUser} from "../../../redux/reducers/auth/auth.actions";
@@ -118,10 +118,12 @@ class Registration extends React.Component{
   render() {
     const {values, errors} = this.state
     const {isFetching} = this.props
+
+    if (this.props.user) {
+      return <Redirect to="/system/bill"/>
+    }
     return(
       <>
-        {/*{nowCanLogin ? <Redirect to="/login"/> : null}*/}
-
         <p className="text-xs-center">Регистрация для получения доступа</p>
         <form>
           <div className={`form-group ${errors.email ? "has-error" : null}`}>
@@ -207,6 +209,7 @@ class Registration extends React.Component{
 
 const mapStateToProps = state => {
   return {
+    user: state.authReducer.user,
     isFetching: state.authReducer.isFetching
   }
 }

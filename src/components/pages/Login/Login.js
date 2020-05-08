@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavLink, withRouter} from 'react-router-dom'
+import {NavLink, Redirect, withRouter} from 'react-router-dom'
 import {connect} from "react-redux";
 import {getUserByEmail} from "../../../redux/reducers/auth/auth.actions";
 
@@ -81,6 +81,10 @@ class Login extends React.Component {
   render() {
     const {values, errors} = this.state
     const {userError, nowCanLogin, isFetching} = this.props
+
+    if (this.props.user) {
+      return <Redirect to="/system/bill"/>
+    }
     return(
       <>
         <p className="text-xs-center">Войдите для работы</p>
@@ -137,6 +141,7 @@ class Login extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    user: state.authReducer.user,
     userError: state.authReducer.userError,
     nowCanLogin: state.authReducer.nowCanLogin,
     isFetching: state.authReducer.isFetching

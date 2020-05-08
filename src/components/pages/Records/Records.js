@@ -1,7 +1,13 @@
 import React from 'react'
+import {Redirect} from "react-router-dom";
+import {connect} from "react-redux";
 
 class Records extends React.Component {
   render() {
+    if (!this.props.user) {
+      return <Redirect to="/login"/>
+    }
+
     return(
       <article className="content">
         <div className="title-block">
@@ -85,4 +91,10 @@ class Records extends React.Component {
   }
 }
 
-export default Records
+const mapStateToProps = state => {
+  return {
+    user: state.authReducer.user
+  }
+}
+
+export default connect(mapStateToProps)(Records)

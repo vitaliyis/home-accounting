@@ -11,11 +11,17 @@
       "password": "1234567",
       "name": "vetal",
       "id": 2
+    },
+    {
+      "email": "vetal.friend@gmail.com",
+      "password": "123456",
+      "name": "vetal",
+      "id": 3
     }
   ],
   "bill": {
-    "value": 100000,
-    "currency": "RUB"
+    "value": 26100,
+    "currency": "UAH"
   },
   "categories": [
     {
@@ -32,6 +38,21 @@
       "id": 3,
       "name": "Машина",
       "capacity": 7000
+    },
+    {
+      "name": "new1",
+      "capacity": 2000,
+      "id": 7
+    },
+    {
+      "name": "new2",
+      "capacity": 5000,
+      "id": 8
+    },
+    {
+      "name": "new3",
+      "capacity": "300",
+      "id": 9
     }
   ],
   "events": [
@@ -74,6 +95,62 @@
       "date": "10.06.2017 14:01:58",
       "id": 5,
       "description": "Заправка + проход ТО"
+    },
+    {
+      "type": "outcome",
+      "amount": 2300,
+      "category": 7,
+      "date": "20.05.2020 14:12:39",
+      "description": "test",
+      "id": 6
+    },
+    {
+      "type": "income",
+      "amount": 2300,
+      "category": 1,
+      "date": "20.05.2020 14:13:40",
+      "description": "test2",
+      "id": 7
+    },
+    {
+      "type": "income",
+      "amount": 300,
+      "category": 7,
+      "date": "20.05.2020 14:15:54",
+      "description": "test",
+      "id": 8
+    },
+    {
+      "type": "outcome",
+      "amount": 300,
+      "category": 7,
+      "date": "20.05.2020 14:16:20",
+      "description": "test2",
+      "id": 9
+    },
+    {
+      "type": "income",
+      "amount": 20000,
+      "category": 7,
+      "date": "20.05.2020 15:13:12",
+      "description": "test2",
+      "id": 10
+    },
+    {
+      "type": "outcome",
+      "amount": 3500,
+      "category": 8,
+      "date": "25.05.2020 09:09:54",
+      "description": "test",
+      "id": 11
+    },
+    {
+      "type": "outcome",
+      "amount": 400,
+      "category": 9,
+      "date": "25.05.2020 09:17:03",
+      "description": "test",
+      "id": 12
     }
   ]
 }

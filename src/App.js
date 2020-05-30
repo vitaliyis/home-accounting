@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Redirect, Route, Switch, withRouter} from 'react-router-dom'
 import Login from "./components/pages/Login/Login";
 import NotFound from "./components/pages/NotFound/NotFound";
@@ -13,15 +13,7 @@ import {getUser} from "./redux/reducers/auth/auth.actions";
 import {connect} from "react-redux";
 
 
-function App(props) {
-  // console.log('props.user => ', props.user)
-  //
-  //
-  // if (!props.user) {
-  //   console.log('Redirect')
-  //   return <Redirect to="/login"/>
-  // }
-
+function App() {
   return (
     <div className="">
       <Switch>

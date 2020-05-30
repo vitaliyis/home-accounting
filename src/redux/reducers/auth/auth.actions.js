@@ -1,5 +1,5 @@
 import {createNewUserApi, getUserByEmailApi} from "../../../api/api";
-import {SET_AUTH, SET_NOW_CAN_LOGIN, UPDATE_ERROR_USER, UPDATE_iS_FETCHING, UPDATE_USER} from "./auth.types";
+import {SET_NOW_CAN_LOGIN, UPDATE_ERROR_USER, UPDATE_iS_FETCHING, UPDATE_USER} from "./auth.types";
 
 export const updateUser = payload => {
   return {

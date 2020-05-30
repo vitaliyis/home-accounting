@@ -1,0 +1,2 @@
+export const UPDATE_BILL = 'UPDATE_BILL'
+export const UPDATE_CURRENCY = 'UPDATE_CURRENCY'

@@ -11,7 +11,8 @@ class HistoryChart extends React.Component {
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
     return (
-      <>
+      <div className="card">
+        <div className="card-block" style={{height: '355px'}}>
         {!isLoaded ? spinner :
         <section className="section">
           <div className="row">
@@ -39,7 +40,8 @@ class HistoryChart extends React.Component {
           </div>
         </section>
         }
-      </>
+        </div>
+      </div>
     )
   }
 }

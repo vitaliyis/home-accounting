@@ -78,6 +78,11 @@ class History extends React.Component {
 }
 
 const mapStateToProps = state => {
+  // корректирую дату из "20.05.2020 14:12:39" в "20.05.2020"
+  // const newEvents = state.recordsReducer.events.map(event => {
+  //   return event.date.split(' ')[0]
+  // })
+
   return{
     categories: state.recordsReducer.categories,
     events: state.recordsReducer.events

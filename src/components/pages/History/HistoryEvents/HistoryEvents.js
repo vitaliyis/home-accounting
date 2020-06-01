@@ -2,16 +2,85 @@ import React from 'react'
 import {NavLink} from "react-router-dom";
 
 class HistoryEvents extends React.Component {
+
+  state = {
+    isOpenDropdown: false,
+    search: {
+      value: '',
+      placeholder: 'Сумма',
+      field: 'amount'
+    }
+  }
+
+  toggleDropdown = () => {
+    this.setState(state => ({
+      isOpenDropdown: !state.isOpenDropdown
+    }))
+  }
+
+  onChange = event => {
+    const value = event.target.value
+
+    this.setState(state => ({
+      search: {...state.search, value}
+    }))
+  }
+
+  changeCriteria = field => {
+    const namesMap = {
+      amount: 'Сумма',
+      date: 'Дата',
+      category: 'Категория',
+      type: 'Тип'
+    }
+
+    this.setState(state => ({
+      search: {
+        ...state.search,
+        placeholder: namesMap[field],
+        field: field
+      },
+      isOpenDropdown: false
+    }))
+  }
+
+  transform = (items, value, field) => {
+    if (items.length === 0 || !value) {
+      return items
+    }
+
+    return items.filter(item => {
+      const t = Object.assign({}, item)
+      if (!isNaN(t[field])) {
+        t[field] += ''
+      }
+
+      if (field === 'type') {
+        t[field] = t[field] === 'income' ? 'доход' : 'расход'
+      }
+
+      if (field === 'category') {
+        t[field] = t['catName']
+      }
+
+      return t[field].toLowerCase().indexOf(value.toLowerCase()) !== -1
+    })
+
+  }
+
   render() {
-    const {categories, events} = this.props
-    console.log('events => ', events)
+    const { isOpenDropdown, search } = this.state
+    const { categories, events } = this.props
 
-    const newEvents = [...events]
-    if (newEvents.length) {newEvents.forEach(e => {
+    let newEvents = [...events]
+    if (newEvents.length) {
+      newEvents.forEach(e => {
       e.catName = categories.find(c => c.id === e.category).name
-    })}
+      e.date = e.date.split(' ')[0]
+    })
+      newEvents = this.transform(newEvents, search.value, search.field)
+    }
 
-    console.log('newEvents => ', newEvents)
     return (
       <section className="section">
         <div className="row">
@@ -23,18 +92,28 @@ class HistoryEvents extends React.Component {
                 </div>
                 <div className="form-inline pull-right m-r-2">
                   <div className="form-group">
-                    <input type="email" className="form-control" placeholder="Поиск..."/>
+                    <input
+                      type="text"
+                      name="search"
+                      className="form-control"
+                      placeholder={search.placeholder}
+                      value={search.value}
+                      onChange={this.onChange}
+                    />
                   </div>
-                  <div className="btn-group">
-                    <button type="button" className="btn btn-secondary dropdown-toggle ">
+                  <div className={`btn-group ${isOpenDropdown ? "open" : null}`}>
+                    <button
+                      type="button"
+                      className="btn btn-secondary dropdown-toggle"
+                      onClick={this.toggleDropdown}
+                    >
                       Параметр
                     </button>
                     <div className="dropdown-menu">
-                      <a className="dropdown-item" href="#">Action</a>
-                      <a className="dropdown-item" href="#">Another action</a>
-                      <a className="dropdown-item" href="#">Something else here</a>
-                      <div className="dropdown-divider"></div>
-                      <a className="dropdown-item" href="#">Separated link</a>
+                      <a className="dropdown-item" onClick={() => this.changeCriteria('amount')}>Сумма</a>
+                      <a className="dropdown-item" onClick={() => this.changeCriteria('date')}>Дата</a>
+                      <a className="dropdown-item" onClick={() => this.changeCriteria('category')}>Категория</a>
+                      <a className="dropdown-item" onClick={() => this.changeCriteria('type')}>Тип</a>
                     </div>
                   </div>
                 </div>
@@ -57,7 +136,7 @@ class HistoryEvents extends React.Component {
                       <tr key={Math.random()}>
                         <th scope="row">{index + 1}</th>
                         <td>{e.amount}</td>
-                        <td>{e.date.split(' ')[0]}</td>
+                        <td>{e.date}</td>
                         <td>{e.catName}</td>
                         <td>
                           <span className={`label label-${e.type === 'income' ? "success" : "danger"}`}>
